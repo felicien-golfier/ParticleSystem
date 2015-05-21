@@ -6,7 +6,7 @@
 #include "Shapes/Pyramid.h"
 #include "Shapes/Cylinder.h"
 #include "Shapes/Star.h"
-#include "Shapes/Particle.h"
+#include "Shapes/ParticleSystem.h"
 
 #include <iostream>
 
@@ -20,7 +20,7 @@ const GLfloat g_AngleSpeed = 10.0f;
 const GLfloat g_zoomSpeed = 1.0f;
 
 Basis* basis;
-Particle* particle;
+ParticleSystem* particle;
 
 
 TP01::TP01()
@@ -28,7 +28,7 @@ TP01::TP01()
 	setWindowTitle(trUtf8("IN55-TP01"));
 
     basis = new Basis( 10.0 );
-    particle = new Particle();
+    particle = new ParticleSystem();
 }
 
 TP01::~TP01()

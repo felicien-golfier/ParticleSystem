@@ -64,7 +64,7 @@ SOURCES       = ../../Common/GlFramework.cpp \
 		../../Common/Quaternion.cpp \
 		../../Common/Vect3.cpp \
 		../../Common/Camera.cpp \
-		../../Common/Shapes/Particle.cpp 
+		../../Common/Shapes/ParticleSystem.cpp 
 OBJECTS       = obj/GlFramework.o \
 		obj/GlWindow.o \
 		obj/LF_String.o \
@@ -81,7 +81,7 @@ OBJECTS       = obj/GlFramework.o \
 		obj/Quaternion.o \
 		obj/Vect3.o \
 		obj/Camera.o \
-		obj/Particle.o
+		obj/ParticleSystem.o
 DIST          = /home/celian/Qt/5.4/gcc_64/mkspecs/features/spec_pre.prf \
 		/home/celian/Qt/5.4/gcc_64/mkspecs/common/shell-unix.conf \
 		/home/celian/Qt/5.4/gcc_64/mkspecs/common/unix.conf \
@@ -215,8 +215,8 @@ DIST          = /home/celian/Qt/5.4/gcc_64/mkspecs/features/spec_pre.prf \
 		../../Common/Quaternion.h \
 		../../Common/Vect3.h \
 		../../Common/Camera.h \
-		../../Common/Shapes/Particle.h \
-		../src/TP01.h ../../Common/GlFramework.cpp \
+		../src/TP01.h \
+		../../Common/Shapes/ParticleSystem.h ../../Common/GlFramework.cpp \
 		../../Common/GlWindow.cpp \
 		../../Common/LF_String.cpp \
 		../../Common/Object3D.cpp \
@@ -232,7 +232,7 @@ DIST          = /home/celian/Qt/5.4/gcc_64/mkspecs/features/spec_pre.prf \
 		../../Common/Quaternion.cpp \
 		../../Common/Vect3.cpp \
 		../../Common/Camera.cpp \
-		../../Common/Shapes/Particle.cpp
+		../../Common/Shapes/ParticleSystem.cpp
 QMAKE_TARGET  = TP01
 DESTDIR       = #avoid trailing-slash linebreak
 TARGET        = TP01
@@ -526,8 +526,8 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents ../../Common/GlFramework.h ../../Common/GlWindow.h ../../Common/LF_String.h ../../Common/Object3D.h ../../Common/Shapes/Basis.h ../../Common/Shapes/Shape.h ../../Common/Shapes/ParametricShape.h ../../Common/Shapes/Cubes.h ../../Common/Shapes/Cylinder.h ../../Common/Shapes/Pyramid.h ../../Common/Shapes/Star.h ../../Common/Quaternion.h ../../Common/Vect3.h ../../Common/Camera.h ../../Common/Shapes/Particle.h ../src/TP01.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../../Common/GlFramework.cpp ../../Common/GlWindow.cpp ../../Common/LF_String.cpp ../../Common/Object3D.cpp ../../Common/Shapes/Basis.cpp ../../Common/Shapes/Shape.cpp ../../Common/Shapes/ParametricShape.cpp ../../Common/Shapes/Cubes.cpp ../../Common/Shapes/Cylinder.cpp ../../Common/Shapes/Pyramid.cpp ../../Common/Shapes/Star.cpp ../src/TP01.cpp ../src/main.cpp ../../Common/Quaternion.cpp ../../Common/Vect3.cpp ../../Common/Camera.cpp ../../Common/Shapes/Particle.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../../Common/GlFramework.h ../../Common/GlWindow.h ../../Common/LF_String.h ../../Common/Object3D.h ../../Common/Shapes/Basis.h ../../Common/Shapes/Shape.h ../../Common/Shapes/ParametricShape.h ../../Common/Shapes/Cubes.h ../../Common/Shapes/Cylinder.h ../../Common/Shapes/Pyramid.h ../../Common/Shapes/Star.h ../../Common/Quaternion.h ../../Common/Vect3.h ../../Common/Camera.h ../src/TP01.h ../../Common/Shapes/ParticleSystem.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../../Common/GlFramework.cpp ../../Common/GlWindow.cpp ../../Common/LF_String.cpp ../../Common/Object3D.cpp ../../Common/Shapes/Basis.cpp ../../Common/Shapes/Shape.cpp ../../Common/Shapes/ParametricShape.cpp ../../Common/Shapes/Cubes.cpp ../../Common/Shapes/Cylinder.cpp ../../Common/Shapes/Pyramid.cpp ../../Common/Shapes/Star.cpp ../src/TP01.cpp ../src/main.cpp ../../Common/Quaternion.cpp ../../Common/Vect3.cpp ../../Common/Camera.cpp ../../Common/Shapes/ParticleSystem.cpp $(DISTDIR)/
 
 
 clean:compiler_clean 
@@ -975,7 +975,7 @@ obj/TP01.o: ../src/TP01.cpp ../../Common/Shapes/Basis.h \
 		../../Common/Shapes/Pyramid.h \
 		../../Common/Shapes/Cylinder.h \
 		../../Common/Shapes/Star.h \
-		../../Common/Shapes/Particle.h
+		../../Common/Shapes/ParticleSystem.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/TP01.o ../src/TP01.cpp
 
 obj/main.o: ../src/main.cpp ../src/TP01.h \
@@ -1201,7 +1201,7 @@ obj/Camera.o: ../../Common/Camera.cpp ../../Common/Camera.h \
 		/home/celian/Qt/5.4/gcc_64/include/QtCore/qstringmatcher.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/Camera.o ../../Common/Camera.cpp
 
-obj/Particle.o: ../../Common/Shapes/Particle.cpp ../../Common/Shapes/Particle.h \
+obj/ParticleSystem.o: ../../Common/Shapes/ParticleSystem.cpp ../../Common/Shapes/ParticleSystem.h \
 		../../Common/Object3D.h \
 		../../Common/AbstractFramework.h \
 		../../glew-mingw/include/GL/glew.h \
@@ -1281,7 +1281,7 @@ obj/Particle.o: ../../Common/Shapes/Particle.cpp ../../Common/Shapes/Particle.h 
 		/home/celian/Qt/5.4/gcc_64/include/QtCore/qstringlist.h \
 		/home/celian/Qt/5.4/gcc_64/include/QtCore/qregexp.h \
 		/home/celian/Qt/5.4/gcc_64/include/QtCore/qstringmatcher.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/Particle.o ../../Common/Shapes/Particle.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/ParticleSystem.o ../../Common/Shapes/ParticleSystem.cpp
 
 ####### Install
 
