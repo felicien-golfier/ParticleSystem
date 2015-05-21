@@ -11,7 +11,20 @@ public:
 protected:
     GLuint bmp_texture_load(const char *filename);
     void drawShape( const char* shader_name );
-    GLfloat p_TabColors[12*3];
+    GLfloat p_TabColors[8*3];
+    GLfloat mTabVertices[8*3] = {
+        -1.0f,-1.0f,-1.0f,
+        -1.0f,-1.0f, 1.0f,
+        -1.0f, 1.0f, 1.0f,
+         1.0f, 1.0f,1.0f,    // triangle 1 : end
+         1.0f, 1.0f,-1.0f,   // triangle 2 : begin
+         1.0f, -1.0f,-1.0f,
+         1.0f, -1.0f,1.0f,
+        -1.0f, 1.0f,-1.0f
+    };
+
+public:
+    void update();
 };
 
 #endif // PARTICLE_H

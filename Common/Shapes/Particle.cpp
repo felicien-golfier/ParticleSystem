@@ -1,4 +1,4 @@
-#include "Shapes\Particle.h"
+#include "Shapes/Particle.h"
 #include "GlFramework.h"
 #include <cstdio>
 #include <stdio.h>
@@ -17,46 +17,27 @@ Particle::Particle()
 }
 
 
-static const GLfloat p_TabVertices[] = {
-    -1.0f,-1.0f,-1.0f,
-    -1.0f,-1.0f, 1.0f,
-    -1.0f, 1.0f, 1.0f,
-    1.0f, 1.0f,1.0f,// triangle 1 : end
-    1.0f, 1.0f,-1.0f, // triangle 2 : begin
-    1.0f, -1.0f,-1.0f,
-    1.0f, -1.0f,1.0f,
-    -1.0f, 1.0f,-1.0f
-
-};
-
-
-
 void Particle::drawShape( const char* shader_name ){
 
 
-    GLuint image = bmp_texture_load("C:\\Users\\Sarry\\Documents\\Taf\\IN55\\TP1\\textures\\test.bmp");
-    GLint var1 = glGetAttribLocation( m_Framework->getCurrentShaderId(), "position" );
+    GLuint image = bmp_texture_load("../../textures/test.bmp");
 
+    GLint var1 = glGetAttribLocation( m_Framework->getCurrentShaderId(), "position" );
     glEnableVertexAttribArray( var1 );
-    glVertexAttribPointer( var1, 3, GL_FLOAT, GL_FALSE, 0, p_TabVertices );
+    glVertexAttribPointer( var1, 3, GL_FLOAT, GL_FALSE, 0, mTabVertices );
 
     GLint var2 = glGetAttribLocation( m_Framework->getCurrentShaderId(), "color" );
     glEnableVertexAttribArray( var2 );
     glVertexAttribPointer( var2, 3, GL_FLOAT, GL_FALSE, 0, p_TabColors );
 
-    if(!strcmp((char*) shader_name, "color"))
-    {
-        glDrawArrays(GL_TRIANGLES,0,12*3);
+    glBindTexture(GL_TEXTURE_2D, image);
 
-    }else
-    {
-        glBindTexture(GL_TEXTURE_2D, image);
-        glEnable(GL_POINT_SPRITE);
-        glTexEnvi(GL_POINT_SPRITE, GL_COORD_REPLACE, GL_TRUE);
-        glDrawArrays(GL_POINTS,0,12*3);
-        glDisable(GL_POINT_SPRITE);
 
-    }
+    glEnable(GL_POINT_SPRITE);
+    glTexEnvi(GL_POINT_SPRITE, GL_COORD_REPLACE, GL_TRUE);
+    glDrawArrays(GL_POINTS, 0, 8*3);
+    glDisable(GL_POINT_SPRITE);
+
     glDisableVertexAttribArray( var1 );
     glDisableVertexAttribArray( var2 );
 }
@@ -76,7 +57,10 @@ void Particle::draw()
     }
 }
 
-
+void Particle::update() {
+//    std::cout << "test" << std::endl;
+    mTabVertices[0] += 0.001;
+}
 
 GLuint Particle::bmp_texture_load(const char *imagepath)
 {

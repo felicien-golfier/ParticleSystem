@@ -10,6 +10,8 @@ TEMPLATE = app
 DEPENDPATH += src
 INCLUDEPATH = ../Common/ src "../glew-mingw\include"
 win32:LIBS += -L"../glew-mingw\lib" -lglew32
+INCLUDEPATH += /usr/include/GL/
+LIBS += -lGLEW
 
 DESTDIR = release
 OBJECTS_DIR = obj
@@ -30,7 +32,8 @@ HEADERS += \
     ../Common/Quaternion.h \
     ../Common/Vect3.h \
     ../Common/Camera.h \
-    ../Common/Shapes/Particle.h
+    ../Common/Shapes/Particle.h \
+    src/TP01.h
 
 SOURCES += \
     ../Common/GlFramework.cpp \
@@ -51,5 +54,5 @@ SOURCES += \
     ../Common/Camera.cpp \
     ../Common/Shapes/Particle.cpp
 
-OTHER_FILES += \
-    PointShader.vert
+#OTHER_FILES += \
+#    PointShader.vert

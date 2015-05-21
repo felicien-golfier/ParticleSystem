@@ -16,6 +16,7 @@ class TP01 : public GlWindow
 		*/
 		bool initializeObjects();
 
+        void logShader(char* shader_name);
 		/*!
 		*\brief Rendu de la scène.
 		*/
