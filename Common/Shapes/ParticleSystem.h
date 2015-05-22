@@ -27,18 +27,19 @@ public:
 
     static const int MAX_PARTICLES = 1000;
     static const int NEW_PARTICLES_PER_MILLISEC = 1;
-    static const char* TEXTURE_URL;
+
 
 
 protected:
 
-    GLfloat* m_color_data;
     GLfloat* m_vertex_data;
+    GLfloat* m_color_data;
     Particle m_particle_container[MAX_PARTICLES];
     double deltaTime;
+    const char* m_texture_url;
 
-    void initializeParticle(Particle &p);
-    void updateParticle(Particle &p);
+    virtual void initializeParticle(Particle &p) = 0;
+    virtual void updateParticle(Particle &p) = 0;
     void draw();
     void drawShape( const char* shader_name );
 

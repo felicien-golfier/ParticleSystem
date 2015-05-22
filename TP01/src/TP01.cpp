@@ -6,7 +6,7 @@
 #include "Shapes/Pyramid.h"
 #include "Shapes/Cylinder.h"
 #include "Shapes/Star.h"
-#include "Shapes/ParticleSystem.h"
+#include "Shapes/Fire.h"
 
 #include <iostream>
 
@@ -20,7 +20,7 @@ const GLfloat g_AngleSpeed = 10.0f;
 const GLfloat g_zoomSpeed = 1.0f;
 
 Basis* basis;
-ParticleSystem* part_system;
+Fire* fire;
 
 
 TP01::TP01()
@@ -28,13 +28,13 @@ TP01::TP01()
 	setWindowTitle(trUtf8("IN55-TP01"));
 
     basis = new Basis( 1.0 );
-    part_system = new ParticleSystem();
+    fire = new Fire();
 }
 
 TP01::~TP01()
 {
     delete basis;
-    delete part_system;
+    delete fire;
 }
 
 
@@ -42,7 +42,7 @@ bool
 TP01::initializeObjects()
 {
 	// Fond gris
-	glClearColor( 0.2f, 0.2f, 0.2f, 1.0f );
+    glClearColor( 0.01f, 0.01f, 0.01f, 1.0f );
 	glEnable( GL_DEPTH_TEST );
     glEnable(GL_POINT_SMOOTH);
     glEnable(GL_VERTEX_PROGRAM_POINT_SIZE);
@@ -89,7 +89,7 @@ TP01::render()
         // Particle system
         pushMatrix();
         scale( 5, 3, 3 );
-        part_system->render();
+        fire->render();
         popMatrix();
 
     popMatrix();

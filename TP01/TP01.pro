@@ -33,7 +33,8 @@ HEADERS += \
     ../Common/Vect3.h \
     ../Common/Camera.h \
     src/TP01.h \
-    ../Common/Shapes/ParticleSystem.h
+    ../Common/Shapes/ParticleSystem.h \
+    ../Common/Shapes/Fire.h
 
 SOURCES += \
     ../Common/GlFramework.cpp \
@@ -52,7 +53,8 @@ SOURCES += \
     ../Common/Quaternion.cpp \
     ../Common/Vect3.cpp \
     ../Common/Camera.cpp \
-    ../Common/Shapes/ParticleSystem.cpp
+    ../Common/Shapes/ParticleSystem.cpp \
+    ../Common/Shapes/Fire.cpp
 
 #OTHER_FILES += \
 #    PointShader.vert

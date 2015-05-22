@@ -1,8 +1,5 @@
 #include "Shapes/ParticleSystem.h"
 
-const char* ParticleSystem::TEXTURE_URL = "../../textures/test.bmp";
-
-
 ParticleSystem::ParticleSystem()
 {
 
@@ -16,23 +13,28 @@ ParticleSystem::ParticleSystem()
 
 void ParticleSystem::drawShape( const char* shader_name ){
 
-    GLuint image = ParticleSystem::bmp_texture_load(TEXTURE_URL);
 
     GLint var1 = glGetAttribLocation( m_Framework->getCurrentShaderId(), "position" );
     glEnableVertexAttribArray( var1 );
-//    glVertexAttribPointer( var1, 3, GL_FLOAT, GL_FALSE, 0, m_TabVertices );
     glVertexAttribPointer( var1, 3, GL_FLOAT, GL_FALSE, 0, m_vertex_data );
 
     GLint var2 = glGetAttribLocation( m_Framework->getCurrentShaderId(), "color" );
     glEnableVertexAttribArray( var2 );
-    glVertexAttribPointer( var2, 3, GL_FLOAT, GL_FALSE, 0, m_color_data );
+    glVertexAttribPointer( var2, 4, GL_FLOAT, GL_FALSE, 0, m_color_data );
 
-    glBindTexture(GL_TEXTURE_2D, image);
+    if (m_texture_url != NULL) {
+        GLuint image = ParticleSystem::bmp_texture_load(m_texture_url);
+        glBindTexture(GL_TEXTURE_2D, image);
+    }
+
+    glEnable( GL_BLEND );
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     glEnable(GL_POINT_SPRITE);
     glTexEnvi(GL_POINT_SPRITE, GL_COORD_REPLACE, GL_TRUE);
     glDrawArrays(GL_POINTS, 0, _particlesCount);
     glDisable(GL_POINT_SPRITE);
+    glDisable(GL_BLEND);
 
     glDisableVertexAttribArray( var1 );
     glDisableVertexAttribArray( var2 );
@@ -79,7 +81,7 @@ void ParticleSystem::render() {
 
     // Initialize vertex and color buffers
     m_vertex_data   = new GLfloat[MAX_PARTICLES * 3];
-    m_color_data    = new GLfloat[MAX_PARTICLES * 3];
+    m_color_data    = new GLfloat[MAX_PARTICLES * 4];
 
     // Bind particles to the vertex and color buffers
     _particlesCount = 0;
@@ -101,15 +103,14 @@ void ParticleSystem::render() {
                 m_vertex_data[3*_particlesCount+1] = p.pos.y;
                 m_vertex_data[3*_particlesCount+2] = p.pos.z;
 
-                m_color_data[3*_particlesCount+0] = p.r;
-                m_color_data[3*_particlesCount+1] = p.g;
-                m_color_data[3*_particlesCount+2] = p.b;
+                m_color_data[4*_particlesCount+0] = p.r;
+                m_color_data[4*_particlesCount+1] = p.g;
+                m_color_data[4*_particlesCount+2] = p.b;
+                m_color_data[4*_particlesCount+3] = p.a;
 
                 _particlesCount++;
 
             }
-
-
 
         }
     }
@@ -141,38 +142,6 @@ int ParticleSystem::FindUnusedParticle(){
 
     return (_lastUsedParticle) % MAX_PARTICLES;
 }
-
-void ParticleSystem::initializeParticle(Particle & p) {
-    p.life = 5.0f; // This particle will live 5 seconds.
-    p.pos = glm::vec3(0,0,0); // and begin from center
-
-    float spread = 1.2f;
-    glm::vec3 maindir = glm::vec3(0.0f, 10.0f, 0.0f);
-    // Very bad way to generate a random direction;
-    // See for instance http://stackoverflow.com/questions/5408276/python-uniform-spherical-distribution instead,
-    // combined with some user-controlled parameters (main direction, spread, etc)
-    glm::vec3 randomdir = glm::vec3(
-        (rand()%2000 - 1000.0f)/1000.0f,
-        (rand()%2000 - 1000.0f)/1000.0f,
-        (rand()%2000 - 1000.0f)/1000.0f
-    );
-
-    p.speed = maindir + randomdir * spread;
-
-
-    p.r = 1.0f;
-    p.g = 1.0f;
-    p.b = 1.0f;
-    p.a = 1.0f;
-}
-
-// Update particle : called each frame
-void ParticleSystem::updateParticle(Particle & p){
-    // Simulate simple physics : gravity only, no collisions
-    p.speed += glm::vec3(0.0f,-9.81f, 0.0f) * (float)deltaTime;
-    p.pos += p.speed * (float)deltaTime;
-}
-
 
 
 GLuint ParticleSystem::bmp_texture_load(const char *imagepath)
