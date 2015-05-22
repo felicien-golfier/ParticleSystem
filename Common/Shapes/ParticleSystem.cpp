@@ -105,9 +105,11 @@ void ParticleSystem::render() {
                 m_color_data[3*_particlesCount+1] = p.g;
                 m_color_data[3*_particlesCount+2] = p.b;
 
+                _particlesCount++;
+
             }
 
-            _particlesCount++;
+
 
         }
     }
@@ -137,7 +139,7 @@ int ParticleSystem::FindUnusedParticle(){
         }
     }
 
-    return 0; // All particles are taken, override the first one
+    return (_lastUsedParticle) % MAX_PARTICLES;
 }
 
 void ParticleSystem::initializeParticle(Particle & p) {
