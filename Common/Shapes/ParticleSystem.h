@@ -11,8 +11,6 @@
 #include <iostream>
 #include <time.h>
 
-static const int MaxParticles = 100000;
-
 // CPU representation of a particle
 struct Particle{
     glm::vec3 pos, speed;
@@ -20,44 +18,40 @@ struct Particle{
     float life; // Remaining life of the particle. if <0 : dead and unused.
 };
 
-
-
 class ParticleSystem : public Object3D
 {
 public:
     ParticleSystem();
-    void draw();
-    void update();
-    int FindUnusedParticle();
+
+    void render();
+
+    static const int MAX_PARTICLES = 1000;
+    static const int NEW_PARTICLES_PER_MILLISEC = 1;
+    static const char* TEXTURE_URL;
+
 
 protected:
+
+    GLfloat* m_color_data;
+    GLfloat* m_vertex_data;
+    Particle m_particle_container[MAX_PARTICLES];
+    double deltaTime;
+
+    void initializeParticle(Particle &p);
+    void updateParticle(Particle &p);
+    void draw();
     void drawShape( const char* shader_name );
-    GLfloat m_TabColors[8*3];
-    GLfloat m_TabVertices[8*3] = {
-        -1.0f,-1.0f,-1.0f,
-        -1.0f,-1.0f, 1.0f,
-        -1.0f, 1.0f, 1.0f,
-         1.0f, 1.0f,1.0f,    // triangle 1 : end
-         1.0f, 1.0f,-1.0f,   // triangle 2 : begin
-         1.0f, -1.0f,-1.0f,
-         1.0f, -1.0f,1.0f,
-        -1.0f, 1.0f,-1.0f
-    };
+
+private:
+    std::clock_t _lastTime;
+
+    int _lastUsedParticle = 0;
+    int _particlesCount = 0;
+    int FindUnusedParticle();
 
 public :
     static GLuint bmp_texture_load(const char *filename);
 
-
-private :
-    std::clock_t _lastTime;
-
-    GLfloat* g_particule_position_size_data;
-    GLfloat* g_particule_color_data;
-
-    Particle ParticlesContainer[MaxParticles];
-
-    int LastUsedParticle = 0;
-    int ParticlesCount = 0;
 
 };
 

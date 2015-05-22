@@ -14,27 +14,27 @@ using namespace std;
 
 GLfloat angle1 = 30.0f;
 GLfloat angle2 = 20.0f;
-GLfloat zoom = 30.0f;
+GLfloat zoom = 10.0f;
 
 const GLfloat g_AngleSpeed = 10.0f;
 const GLfloat g_zoomSpeed = 1.0f;
 
 Basis* basis;
-ParticleSystem* particle;
+ParticleSystem* part_system;
 
 
 TP01::TP01()
 {
 	setWindowTitle(trUtf8("IN55-TP01"));
 
-    basis = new Basis( 10.0 );
-    particle = new ParticleSystem();
+    basis = new Basis( 1.0 );
+    part_system = new ParticleSystem();
 }
 
 TP01::~TP01()
 {
     delete basis;
-    delete particle;
+    delete part_system;
 }
 
 
@@ -89,8 +89,7 @@ TP01::render()
         // Particle system
         pushMatrix();
         scale( 5, 3, 3 );
-        particle->update();
-        particle->draw();
+        part_system->render();
         popMatrix();
 
     popMatrix();
