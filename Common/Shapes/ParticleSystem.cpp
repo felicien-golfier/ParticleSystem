@@ -28,7 +28,12 @@ void ParticleSystem::drawShape( const char* shader_name ){
     }
 
     glEnable( GL_BLEND );
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glBlendFunc(GL_SRC_ALPHA, GL_DST_ALPHA);
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+    glGenerateMipmap(GL_TEXTURE_2D);
 
     glEnable(GL_POINT_SPRITE);
     glTexEnvi(GL_POINT_SPRITE, GL_COORD_REPLACE, GL_TRUE);
@@ -54,6 +59,10 @@ void ParticleSystem::draw()
 
         drawShape("particle");
     }
+}
+
+void ParticleSystem::SortParticles(){
+    std::sort(&m_particle_container[0], &m_particle_container[MAX_PARTICLES]);
 }
 
 void ParticleSystem::render() {
@@ -115,6 +124,7 @@ void ParticleSystem::render() {
         }
     }
 
+//    SortParticles();
     // Finally we draw the vertex and color buffer
     this->draw();
 }

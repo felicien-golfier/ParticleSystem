@@ -16,6 +16,11 @@ struct Particle{
     glm::vec3 pos, speed;
     float r,g,b,a; // Color
     float life; // Remaining life of the particle. if <0 : dead and unused.
+
+    bool operator<(const Particle& that) const {
+        // Sort in reverse order : far particles drawn first.
+        return this->a < that.a;
+    }
 };
 
 class ParticleSystem : public Object3D
@@ -49,6 +54,7 @@ private:
     int _lastUsedParticle = 0;
     int _particlesCount = 0;
     int FindUnusedParticle();
+    void SortParticles();
 
 public :
     static GLuint bmp_texture_load(const char *filename);

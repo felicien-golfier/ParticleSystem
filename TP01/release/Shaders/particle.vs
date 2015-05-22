@@ -11,7 +11,7 @@ out vec4 vColor;
 	gl_Position =  MVP * vec4(position, 1);
 
 	float d = distance(gl_Position, vec4(0,0,0,1));
-	gl_PointSize = 10000/(d);
+	gl_PointSize = 1000/(d);
     vColor = color;
 }
 

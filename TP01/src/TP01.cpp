@@ -6,6 +6,7 @@
 #include "Shapes/Pyramid.h"
 #include "Shapes/Cylinder.h"
 #include "Shapes/Star.h"
+#include "Shapes/Cloud.h"
 #include "Shapes/Fire.h"
 
 #include <iostream>
@@ -20,6 +21,7 @@ const GLfloat g_AngleSpeed = 10.0f;
 const GLfloat g_zoomSpeed = 1.0f;
 
 Basis* basis;
+Cloud* cloud;
 Fire* fire;
 
 
@@ -28,12 +30,14 @@ TP01::TP01()
 	setWindowTitle(trUtf8("IN55-TP01"));
 
     basis = new Basis( 1.0 );
+    cloud = new Cloud();
     fire = new Fire();
 }
 
 TP01::~TP01()
 {
     delete basis;
+    delete cloud;
     delete fire;
 }
 
@@ -86,7 +90,14 @@ TP01::render()
         rotate( angle2, 1, 0, 0 );
         basis->draw();
 
-        // Particle system
+        // Cloud
+        pushMatrix();
+        scale( 5, 3, 3 );
+        translate(0, 1, 0);
+        cloud->render();
+        popMatrix();
+
+        // Fire
         pushMatrix();
         scale( 5, 3, 3 );
         fire->render();

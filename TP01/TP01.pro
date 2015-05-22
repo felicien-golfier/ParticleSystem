@@ -34,6 +34,7 @@ HEADERS += \
     ../Common/Camera.h \
     src/TP01.h \
     ../Common/Shapes/ParticleSystem.h \
+    ../Common/Shapes/Cloud.h \
     ../Common/Shapes/Fire.h
 
 SOURCES += \
@@ -54,6 +55,7 @@ SOURCES += \
     ../Common/Vect3.cpp \
     ../Common/Camera.cpp \
     ../Common/Shapes/ParticleSystem.cpp \
+    ../Common/Shapes/Cloud.cpp \
     ../Common/Shapes/Fire.cpp
 
 #OTHER_FILES += \

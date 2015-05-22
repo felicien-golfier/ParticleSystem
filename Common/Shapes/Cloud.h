@@ -1,20 +1,21 @@
-#ifndef FIRE_H
-#define FIRE_H
+#ifndef CLOUD_H
+#define CLOUD_H
 
 #include "Shapes/ParticleSystem.h"
 
-class Fire : public ParticleSystem
+class Cloud : public ParticleSystem
 {
 public:
-    Fire();
-    ~Fire();
+    Cloud();
+    ~Cloud();
 
     static const int MAX_PARTICLES = 1000000;
     static const int NEW_PARTICLES_PER_MILLISEC = 10000;
+
 
 protected:
     void initializeParticle(Particle &p);
     void updateParticle(Particle &p);
 };
 
-#endif // FIRE_H
+#endif // CLOUD_H
