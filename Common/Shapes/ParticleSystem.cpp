@@ -23,12 +23,21 @@ void ParticleSystem::drawShape( const char* shader_name ){
     glVertexAttribPointer( var2, 4, GL_FLOAT, GL_FALSE, 0, m_color_data );
 
     if (m_texture_url != NULL) {
-        GLuint image = ParticleSystem::bmp_texture_load(m_texture_url);
+        GLuint image = SOIL_load_OGL_texture
+        (
+         m_texture_url,
+         SOIL_LOAD_AUTO,
+         SOIL_CREATE_NEW_ID,
+         SOIL_FLAG_INVERT_Y
+        );
+
+//        GLuint image = m_Framework->createTexture(m_texture_url);
+//        GLuint image = ParticleSystem::bmp_texture_load(m_texture_url);
         glBindTexture(GL_TEXTURE_2D, image);
     }
 
     glEnable( GL_BLEND );
-    glBlendFunc(GL_SRC_ALPHA, GL_DST_ALPHA);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);

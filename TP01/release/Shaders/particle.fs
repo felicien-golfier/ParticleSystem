@@ -60,11 +60,11 @@ void degrade (vec2 pos)
 
 void main(){
 	
-	degrade(gl_PointCoord);
+	//degrade(gl_PointCoord);
 
 	
     vec4 texColor = texture2D(tex, gl_PointCoord);
-	isBlack(texColor.rgb);
+	//isBlack(texColor.rgb);
     fragColor = vec4(texColor.rgb, texColor.a)*vColor;
 
 }

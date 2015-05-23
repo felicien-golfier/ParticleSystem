@@ -9,6 +9,7 @@ TEMPLATE = app
 
 DEPENDPATH += src
 INCLUDEPATH = ../Common/ src "../glew-mingw\include"
+INCLUDEPATH += ../external/soil/src/
 win32:LIBS += -L"../glew-mingw\lib" -lglew32
 INCLUDEPATH += /usr/include/GL/
 LIBS += -lGLEW
@@ -60,3 +61,17 @@ SOURCES += \
 
 #OTHER_FILES += \
 #    PointShader.vert
+
+
+#win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../external/soil/lib/release/ -lSOIL
+#else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../external/soil/lib/debug/ -lSOIL
+unix: LIBS += -L$$PWD/../external/soil/lib/ -lSOIL
+
+INCLUDEPATH += $$PWD/../external/soil/src
+DEPENDPATH += $$PWD/../external/soil/lib
+
+#win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/../external/soil/lib/release/libSOIL.a
+#else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../external/soil/lib/debug/libSOIL.a
+#else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/../external/soil/lib/release/SOIL.lib
+#else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../external/soil/lib/debug/SOIL.lib
+unix: PRE_TARGETDEPS += $$PWD/../external/soil/lib/libSOIL.a

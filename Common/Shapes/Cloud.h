@@ -6,11 +6,11 @@
 class Cloud : public ParticleSystem
 {
 public:
-    Cloud();
+    Cloud(const glm::vec3 &camera_position);
     ~Cloud();
 
-    static const int MAX_PARTICLES = 1000000;
-    static const int NEW_PARTICLES_PER_MILLISEC = 10000;
+    static const int MAX_PARTICLES = 1000;
+    static const int NEW_PARTICLES_PER_MILLISEC = 1;
 
 
 protected:

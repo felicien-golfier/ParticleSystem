@@ -1,8 +1,8 @@
 #include "Cloud.h"
 
-Cloud::Cloud()
+Cloud::Cloud(const glm::vec3 &camera_position) : ParticleSystem(camera_position)
 {
-    m_texture_url = "../../textures/fog2.bmp";
+    m_texture_url = "../../textures/smoke.png";
 }
 
 Cloud::~Cloud()
@@ -29,7 +29,7 @@ void Cloud::initializeParticle(Particle & p) {
     p.r = 1.0f;
     p.g = 1.0f;
     p.b = 1.0f;
-    p.a = 0.5f;//(rand()%10)/10.0f;
+    p.a = 1.0f;//(rand()%10)/10.0f;
 }
 
 // Update particle : called each frame

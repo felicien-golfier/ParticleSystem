@@ -15,7 +15,7 @@ CXX           = g++
 DEFINES       = -DQT_NO_DEBUG -DQT_OPENGL_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -O2 -Wall -W -D_REENTRANT -fPIE $(DEFINES)
 CXXFLAGS      = -pipe -O2 -Wall -W -D_REENTRANT -fPIE $(DEFINES)
-INCPATH       = -I../../TP01 -I. -I../../Common -I../src -I../glew-mingw\include -I/usr/include/GL -I/home/celian/Qt/5.4/gcc_64/include -I/home/celian/Qt/5.4/gcc_64/include/QtOpenGL -I/home/celian/Qt/5.4/gcc_64/include/QtWidgets -I/home/celian/Qt/5.4/gcc_64/include/QtGui -I/home/celian/Qt/5.4/gcc_64/include/QtCore -I. -I/home/celian/Qt/5.4/gcc_64/mkspecs/linux-g++
+INCPATH       = -I../../TP01 -I. -I../../Common -I../src -I../glew-mingw\include -I../../external/soil/src -I/usr/include/GL -I../../external/soil/src -I/home/celian/Qt/5.4/gcc_64/include -I/home/celian/Qt/5.4/gcc_64/include/QtOpenGL -I/home/celian/Qt/5.4/gcc_64/include/QtWidgets -I/home/celian/Qt/5.4/gcc_64/include/QtGui -I/home/celian/Qt/5.4/gcc_64/include/QtCore -I. -I/home/celian/Qt/5.4/gcc_64/mkspecs/linux-g++
 QMAKE         = /home/celian/Qt/5.4/gcc_64/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -36,7 +36,7 @@ DISTNAME      = TP011.0.0
 DISTDIR = /home/celian/Documents/IN55/Projet/ParticleSystem/TP01/obj/TP011.0.0
 LINK          = g++
 LFLAGS        = -Wl,-O1 -Wl,-rpath,/home/celian/Qt/5.4/gcc_64 -Wl,-rpath,/home/celian/Qt/5.4/gcc_64/lib
-LIBS          = $(SUBLIBS) -lGLEW -L/home/celian/Qt/5.4/gcc_64/lib -lQt5OpenGL -lQt5Widgets -lQt5Gui -lQt5Core -lGL -lpthread 
+LIBS          = $(SUBLIBS) -lGLEW -L/home/celian/Documents/IN55/Projet/ParticleSystem/TP01/../external/soil/lib/ -lSOIL -L/home/celian/Qt/5.4/gcc_64/lib -lQt5OpenGL -lQt5Widgets -lQt5Gui -lQt5Core -lGL -lpthread 
 AR            = ar cqs
 RANLIB        = 
 SED           = sed
@@ -268,7 +268,7 @@ first: all
 
 ####### Build rules
 
-$(TARGET):  $(OBJECTS)  
+$(TARGET): /home/celian/Documents/IN55/Projet/ParticleSystem/TP01/../external/soil/lib/libSOIL.a $(OBJECTS)  
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
 
 Makefile: ../TP01.pro /home/celian/Qt/5.4/gcc_64/mkspecs/linux-g++/qmake.conf /home/celian/Qt/5.4/gcc_64/mkspecs/features/spec_pre.prf \
@@ -1060,7 +1060,9 @@ obj/TP01.o: ../src/TP01.cpp ../../Common/Shapes/Basis.h \
 		/home/celian/Qt/5.4/gcc_64/include/QtGui/qpixelformat.h \
 		/home/celian/Qt/5.4/gcc_64/include/QtCore/qstringlist.h \
 		/home/celian/Qt/5.4/gcc_64/include/QtCore/qregexp.h \
-		/home/celian/Qt/5.4/gcc_64/include/QtCore/qstringmatcher.h
+		/home/celian/Qt/5.4/gcc_64/include/QtCore/qstringmatcher.h \
+		../../external/soil/src/SOIL.h \
+		../../Common/Shapes/Fire.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/TP01.o ../src/TP01.cpp
 
 obj/main.o: ../src/main.cpp ../src/TP01.h \
@@ -1365,7 +1367,8 @@ obj/ParticleSystem.o: ../../Common/Shapes/ParticleSystem.cpp ../../Common/Shapes
 		/home/celian/Qt/5.4/gcc_64/include/QtGui/qpixelformat.h \
 		/home/celian/Qt/5.4/gcc_64/include/QtCore/qstringlist.h \
 		/home/celian/Qt/5.4/gcc_64/include/QtCore/qregexp.h \
-		/home/celian/Qt/5.4/gcc_64/include/QtCore/qstringmatcher.h
+		/home/celian/Qt/5.4/gcc_64/include/QtCore/qstringmatcher.h \
+		../../external/soil/src/SOIL.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/ParticleSystem.o ../../Common/Shapes/ParticleSystem.cpp
 
 obj/Cloud.o: ../../Common/Shapes/Cloud.cpp ../../Common/Shapes/Cloud.h \
@@ -1448,7 +1451,8 @@ obj/Cloud.o: ../../Common/Shapes/Cloud.cpp ../../Common/Shapes/Cloud.h \
 		/home/celian/Qt/5.4/gcc_64/include/QtGui/qpixelformat.h \
 		/home/celian/Qt/5.4/gcc_64/include/QtCore/qstringlist.h \
 		/home/celian/Qt/5.4/gcc_64/include/QtCore/qregexp.h \
-		/home/celian/Qt/5.4/gcc_64/include/QtCore/qstringmatcher.h
+		/home/celian/Qt/5.4/gcc_64/include/QtCore/qstringmatcher.h \
+		../../external/soil/src/SOIL.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/Cloud.o ../../Common/Shapes/Cloud.cpp
 
 obj/Fire.o: ../../Common/Shapes/Fire.cpp ../../Common/Shapes/Fire.h \
@@ -1531,7 +1535,8 @@ obj/Fire.o: ../../Common/Shapes/Fire.cpp ../../Common/Shapes/Fire.h \
 		/home/celian/Qt/5.4/gcc_64/include/QtGui/qpixelformat.h \
 		/home/celian/Qt/5.4/gcc_64/include/QtCore/qstringlist.h \
 		/home/celian/Qt/5.4/gcc_64/include/QtCore/qregexp.h \
-		/home/celian/Qt/5.4/gcc_64/include/QtCore/qstringmatcher.h
+		/home/celian/Qt/5.4/gcc_64/include/QtCore/qstringmatcher.h \
+		../../external/soil/src/SOIL.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/Fire.o ../../Common/Shapes/Fire.cpp
 
 ####### Install
