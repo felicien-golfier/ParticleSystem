@@ -20,6 +20,7 @@
 #version 140
 
 in vec4 vColor;
+in float theta;
 out vec4 fragColor;
 uniform sampler2D tex;
 
@@ -59,11 +60,18 @@ void degrade (vec2 pos)
 
 
 void main(){
-	
-	//degrade(gl_PointCoord);
 
-	
-    vec4 texColor = texture2D(tex, gl_PointCoord);
+	//degrade(gl_PointCoord);
+	mat2 rotation = mat2(
+		cos(theta), -sin(theta),
+		sin(theta), cos(theta)
+	);
+
+	float mid = 0.5;
+	vec2 rotated = vec2(cos(theta) * (gl_PointCoord.x - mid) + sin(theta) * (gl_PointCoord.y - mid) + mid,
+	                  cos(theta) * (gl_PointCoord.y - mid) - sin(theta) * (gl_PointCoord.x - mid) + mid);
+
+    vec4 texColor = texture2D(tex, rotated);
 	//isBlack(texColor.rgb);
     fragColor = vec4(texColor.rgb, texColor.a)*vColor;
 

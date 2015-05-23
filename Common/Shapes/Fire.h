@@ -9,8 +9,8 @@ public:
     Fire();
     ~Fire();
 
-    static const int MAX_PARTICLES = 1000000;
-    static const int NEW_PARTICLES_PER_MILLISEC = 10000;
+    static const int MAX_PARTICLES = 1;
+    static const int NEW_PARTICLES_PER_MILLISEC = 1;
 
 protected:
     void initializeParticle(Particle &p);
