@@ -6,7 +6,7 @@
 class Cloud : public ParticleSystem
 {
 public:
-    Cloud(const glm::vec3 &camera_position);
+    Cloud();
     ~Cloud();
 
     static const int MAX_PARTICLES = 1000;

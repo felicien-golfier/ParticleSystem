@@ -10,6 +10,7 @@
 #include <string.h>
 #include <iostream>
 #include <time.h>
+#include "SOIL.h"
 
 // CPU representation of a particle
 struct Particle{
@@ -54,7 +55,6 @@ private:
     int _lastUsedParticle = 0;
     int _particlesCount = 0;
     int FindUnusedParticle();
-    void SortParticles();
 
 public :
     static GLuint bmp_texture_load(const char *filename);

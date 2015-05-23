@@ -1,6 +1,6 @@
 #include "Fire.h"
 
-Fire::Fire(const glm::vec3 &camera_position) : ParticleSystem(camera_position)
+Fire::Fire()
 {
     m_texture_url = "../../textures/fire.png";
 }
@@ -12,7 +12,7 @@ Fire::~Fire()
 }
 
 void Fire::initializeParticle(Particle & p) {
-    p.life = 2.0f; // This particle will live 5 seconds.
+    p.life = 3.0f; // This particle will live 5 seconds.
     p.pos = glm::vec3(0,0,0); // and begin from center
 
     float spread = 1.0f;
@@ -34,8 +34,11 @@ void Fire::initializeParticle(Particle & p) {
 
 // Update particle : called each frame
 void Fire::updateParticle(Particle & p){
+    // Decrease life
+    p.life -= deltaTime * 10.0f;
+
     // Simulate simple physics : gravity only, no collisions
-    p.speed += glm::vec3(0.0f,1.81f, 0.0f) * (float)deltaTime;
+    p.speed += glm::vec3(0.0f,1.5f, 0.0f) * (float)deltaTime;
     p.pos += p.speed * (float)deltaTime;
 
     p.a -= 0.001f;

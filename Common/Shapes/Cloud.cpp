@@ -1,6 +1,6 @@
 #include "Cloud.h"
 
-Cloud::Cloud(const glm::vec3 &camera_position) : ParticleSystem(camera_position)
+Cloud::Cloud()
 {
     m_texture_url = "../../textures/smoke.png";
 }
@@ -34,6 +34,8 @@ void Cloud::initializeParticle(Particle & p) {
 
 // Update particle : called each frame
 void Cloud::updateParticle(Particle & p){
+    // Decrease life
+    p.life -= deltaTime * 10.0f;
     // Simulate simple physics : gravity only, no collisions
 //    p.speed += glm::vec3(0.0f,-9.81f, 0.0f) * (float)deltaTime;
     p.pos += p.speed * (float)deltaTime;

@@ -1061,7 +1061,6 @@ obj/TP01.o: ../src/TP01.cpp ../../Common/Shapes/Basis.h \
 		/home/celian/Qt/5.4/gcc_64/include/QtCore/qstringlist.h \
 		/home/celian/Qt/5.4/gcc_64/include/QtCore/qregexp.h \
 		/home/celian/Qt/5.4/gcc_64/include/QtCore/qstringmatcher.h \
-		../../external/soil/src/SOIL.h \
 		../../Common/Shapes/Fire.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/TP01.o ../src/TP01.cpp
 
@@ -1367,8 +1366,7 @@ obj/ParticleSystem.o: ../../Common/Shapes/ParticleSystem.cpp ../../Common/Shapes
 		/home/celian/Qt/5.4/gcc_64/include/QtGui/qpixelformat.h \
 		/home/celian/Qt/5.4/gcc_64/include/QtCore/qstringlist.h \
 		/home/celian/Qt/5.4/gcc_64/include/QtCore/qregexp.h \
-		/home/celian/Qt/5.4/gcc_64/include/QtCore/qstringmatcher.h \
-		../../external/soil/src/SOIL.h
+		/home/celian/Qt/5.4/gcc_64/include/QtCore/qstringmatcher.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/ParticleSystem.o ../../Common/Shapes/ParticleSystem.cpp
 
 obj/Cloud.o: ../../Common/Shapes/Cloud.cpp ../../Common/Shapes/Cloud.h \
@@ -1451,8 +1449,7 @@ obj/Cloud.o: ../../Common/Shapes/Cloud.cpp ../../Common/Shapes/Cloud.h \
 		/home/celian/Qt/5.4/gcc_64/include/QtGui/qpixelformat.h \
 		/home/celian/Qt/5.4/gcc_64/include/QtCore/qstringlist.h \
 		/home/celian/Qt/5.4/gcc_64/include/QtCore/qregexp.h \
-		/home/celian/Qt/5.4/gcc_64/include/QtCore/qstringmatcher.h \
-		../../external/soil/src/SOIL.h
+		/home/celian/Qt/5.4/gcc_64/include/QtCore/qstringmatcher.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/Cloud.o ../../Common/Shapes/Cloud.cpp
 
 obj/Fire.o: ../../Common/Shapes/Fire.cpp ../../Common/Shapes/Fire.h \
@@ -1535,8 +1532,7 @@ obj/Fire.o: ../../Common/Shapes/Fire.cpp ../../Common/Shapes/Fire.h \
 		/home/celian/Qt/5.4/gcc_64/include/QtGui/qpixelformat.h \
 		/home/celian/Qt/5.4/gcc_64/include/QtCore/qstringlist.h \
 		/home/celian/Qt/5.4/gcc_64/include/QtCore/qregexp.h \
-		/home/celian/Qt/5.4/gcc_64/include/QtCore/qstringmatcher.h \
-		../../external/soil/src/SOIL.h
+		/home/celian/Qt/5.4/gcc_64/include/QtCore/qstringmatcher.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/Fire.o ../../Common/Shapes/Fire.cpp
 
 ####### Install

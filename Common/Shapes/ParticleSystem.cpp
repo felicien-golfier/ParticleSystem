@@ -22,8 +22,9 @@ void ParticleSystem::drawShape( const char* shader_name ){
     glEnableVertexAttribArray( var2 );
     glVertexAttribPointer( var2, 4, GL_FLOAT, GL_FALSE, 0, m_color_data );
 
+    GLuint image;
     if (m_texture_url != NULL) {
-        GLuint image = SOIL_load_OGL_texture
+        image = SOIL_load_OGL_texture
         (
          m_texture_url,
          SOIL_LOAD_AUTO,
@@ -31,12 +32,11 @@ void ParticleSystem::drawShape( const char* shader_name ){
          SOIL_FLAG_INVERT_Y
         );
 
-//        GLuint image = m_Framework->createTexture(m_texture_url);
-//        GLuint image = ParticleSystem::bmp_texture_load(m_texture_url);
         glBindTexture(GL_TEXTURE_2D, image);
     }
 
     glEnable( GL_BLEND );
+    glDepthMask(GL_FALSE);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -48,6 +48,7 @@ void ParticleSystem::drawShape( const char* shader_name ){
     glTexEnvi(GL_POINT_SPRITE, GL_COORD_REPLACE, GL_TRUE);
     glDrawArrays(GL_POINTS, 0, _particlesCount);
     glDisable(GL_POINT_SPRITE);
+    glDepthMask(GL_TRUE);
     glDisable(GL_BLEND);
 
     glDisableVertexAttribArray( var1 );
@@ -55,6 +56,7 @@ void ParticleSystem::drawShape( const char* shader_name ){
 
     delete [] m_vertex_data;
     delete [] m_color_data;
+    glDeleteTextures( 1, &image );
 }
 
 void ParticleSystem::draw()
@@ -68,10 +70,6 @@ void ParticleSystem::draw()
 
         drawShape("particle");
     }
-}
-
-void ParticleSystem::SortParticles(){
-    std::sort(&m_particle_container[0], &m_particle_container[MAX_PARTICLES]);
 }
 
 void ParticleSystem::render() {
@@ -109,12 +107,9 @@ void ParticleSystem::render() {
 
         if(p.life > 0.0f){
 
-            // Decrease life
-            p.life -= deltaTime * 10.0f;
+            updateParticle(p);
 
             if (p.life > 0.0f) {
-
-                updateParticle(p);
 
                 // Fill the GPU buffer
                 m_vertex_data[3*_particlesCount+0] = p.pos.x;
@@ -133,7 +128,6 @@ void ParticleSystem::render() {
         }
     }
 
-//    SortParticles();
     // Finally we draw the vertex and color buffer
     this->draw();
 }
