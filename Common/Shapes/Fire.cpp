@@ -27,8 +27,8 @@ void Fire::initializeParticle(Particle & p) {
     p.speed = maindir + randomdir * spread;
 
     p.r = 1.0f;
-    p.g = 0.0f;
-    p.b = 0.0f;
+    p.g = 1.0f;
+    p.b = 1.0f;
     p.a = 1.0f;//(rand()%10)/10.0f;
 }
 
@@ -47,8 +47,14 @@ void Fire::updateParticle(Particle & p){
     p.pos += p.speed * (float)deltaTime;
 
     p.g = 1.0f - 2.0f * (
-        0.8f * glm::distance(p.pos, glm::vec3(0, p.pos.y, 0)) +
-        0.2f * glm::distance(p.pos, glm::vec3(0, 0, 0))
+        0.9f * glm::distance(p.pos, glm::vec3(0, p.pos.y, 0)) +
+        0.1f * glm::distance(p.pos, glm::vec3(0, 0, 0))
+    );
+
+
+    p.b = 0.5f + 0.5f*(rand()%1) - 5.0f * (
+        0.9f * glm::distance(p.pos, glm::vec3(0, p.pos.y, 0)) +
+        0.1f * glm::distance(p.pos, glm::vec3(0, 0, 0))
     );
     p.a = 1.0f - 1.8f*glm::distance(p.pos, glm::vec3(0, p.pos.y, 0)) ;
 }
