@@ -31,8 +31,8 @@ public:
 
     void render();
 
-    static const int MAX_PARTICLES = 100000;
-    static const int NEW_PARTICLES_PER_MILLISEC = 10;
+    static const int MAX_PARTICLES = 1000;
+    static const int NEW_PARTICLES_PER_MILLISEC = 1;
 
 
 

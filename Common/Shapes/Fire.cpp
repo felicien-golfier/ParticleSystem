@@ -2,7 +2,7 @@
 
 Fire::Fire()
 {
-    m_texture_url = "../../textures/fire5.png";
+    m_texture_url = "../../textures/fire6.png";
 }
 
 
