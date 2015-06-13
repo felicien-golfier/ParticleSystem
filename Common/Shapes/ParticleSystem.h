@@ -26,22 +26,28 @@ struct Particle{
 
 class ParticleSystem : public Object3D
 {
+
+//Absract class does not need constructor
 public:
-    ParticleSystem();
+    ~ParticleSystem();
 
     void render();
 
-    static const int MAX_PARTICLES = 1000;
-    static const int NEW_PARTICLES_PER_MILLISEC = 1;
-
+protected:
+    int MAX_PARTICLES;
+    int NEW_PARTICLES_PER_MILLISEC;
+    void initSystem();
 
 
 protected:
 
     GLfloat* m_vertex_data;
     GLfloat* m_color_data;
-    Particle m_particle_container[MAX_PARTICLES];
+    Particle* m_particle_container;
     double deltaTime;
+    double current_fps;
+    double average_fps = 0;
+    long nb_frames = 0;
     const char* m_texture_url;
 
     virtual void initializeParticle(Particle &p) = 0;
@@ -51,14 +57,12 @@ protected:
 
 private:
     std::clock_t _lastTime;
+    std::clock_t _fpsTime;
+    int _frames_count = 0;
 
     int _lastUsedParticle = 0;
     int _particlesCount = 0;
     int FindUnusedParticle();
-
-public :
-    static GLuint bmp_texture_load(const char *filename);
-
 
 };
 

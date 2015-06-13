@@ -3,6 +3,9 @@
 Fire::Fire()
 {
     m_texture_url = "../../textures/fire6.png";
+    MAX_PARTICLES = 1000;
+    NEW_PARTICLES_PER_MILLISEC = 20;
+    initSystem();
 }
 
 

@@ -1,17 +1,18 @@
-#ifndef FIRE_H
-#define FIRE_H
+#ifndef SMOKE_H
+#define SMOKE_H
 
 #include "Shapes/ParticleSystem.h"
 
-class Fire : public ParticleSystem
+class Smoke : public ParticleSystem
 {
 public:
-    Fire();
-    ~Fire();
+    Smoke();
+    ~Smoke();
+
 
 protected:
     void initializeParticle(Particle &p);
     void updateParticle(Particle &p);
 };
 
-#endif // FIRE_H
+#endif // SMOKE_H
